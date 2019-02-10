@@ -7,7 +7,7 @@ fastify.post('/', function (request, reply) {
         return;
     }
 
-    let result = mjml(request.body.mjml);
+    let result = mjml.mjml2html(request.body.mjml);
 
     if (Object.keys(result.errors).length) {
         Object.keys(result.errors).forEach((key) => {
