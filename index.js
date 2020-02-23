@@ -1,11 +1,24 @@
 const fastify = require('fastify')()
 const mjml = require('mjml')
+const dayjs = require('dayjs')
+
+const log = {
+  error: function (text) {
+    console.log("[" + dayjs().format('YYYY-MM-DD HH:mm:ss') + "] Error: " + text)
+  },
+
+  notice: function (text) {
+    console.log("[" + dayjs().format('YYYY-MM-DD HH:mm:ss') + "] Notice: " + text)
+  }
+}
 
 fastify.post('/', function (request, reply) {
   if (!request.body || typeof request.body.mjml === 'undefined' || request.body.mjml === null) {
     reply.send({
       error: "No MJML input"
     })
+
+    log.error("Received empty request body")
 
     return;
   }
@@ -24,5 +37,6 @@ fastify.post('/', function (request, reply) {
 // Run the server!
 fastify.listen(3000, '127.0.0.1', function (err) {
   if (err) throw err;
-  console.log(`server listening on ${fastify.server.address().port}`)
+
+  log.notice(`server listening on ${fastify.server.address().port}`)
 })
