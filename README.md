@@ -6,7 +6,22 @@
     * ```npm install```
 * Run the server
     * ``node index.js``
-* Configure a reverse proxy to 127.0.0.1:3000
+* The service is running on to 127.0.0.1:3000
+
+## Production
+It is recommended to use supervisor to keep this process running. Example configuration is below.
+
+```
+[program:mjml-server]
+process_name=%(program_name)s_%(process_num)02d
+command=node /var/www/mjml-server/index.js
+autostart=true
+autorestart=true
+user=www-data
+numprocs=1
+redirect_stderr=true
+stdout_logfile=/var/www/mjml-server/logs/mjml-server.log
+```
 
 ## How to use the server?
 
