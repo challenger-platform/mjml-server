@@ -23,6 +23,8 @@ redirect_stderr=true
 stdout_logfile=/var/www/mjml-server/logs/mjml-server.log
 ```
 
+Don't forget to add `logs` directory (or disable it) in this case.
+
 ## How to use the server?
 
 ```bash
