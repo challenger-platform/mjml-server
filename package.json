@@ -11,7 +11,6 @@
   "dependencies": {
     "dayjs": "^1.8.20",
     "fastify": "^1.14.6",
-    "mjml3": "npm:mjml@^3.3.5",
-    "mjml4": "npm:mjml@^4.6.3"
+    "mjml": "^4.6.3"
   }
 }

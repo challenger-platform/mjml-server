@@ -1,6 +1,5 @@
 const fastify = require('fastify')()
-const mjml3 = require('mjml3')
-const mjml4 = require('mjml4')
+const mjml2html = require('mjml')
 const dayjs = require('dayjs')
 
 const port = 3000
@@ -29,31 +28,21 @@ let processPost = function (request, reply) {
     return;
   }
 
-  // Parse MJML4
-  if(url.pathname == '/v4'){
-    let result = mjml4(request.body.mjml, {
-      minify: true,
-    });
+  let result = mjml2html(request.body.mjml, {
+    minify: true,
+  })
 
-    console.log(result);
-    reply.send(result.html)
-  }else{ // Parse MJML3 by default
-    let result = mjml3.mjml2html(request.body.mjml);
-
-    if (Object.keys(result.errors).length) {
-      Object.keys(result.errors).forEach((key) => {
-        delete result.errors[key].formattedMessage
-      })
-    }
-
-    reply.send(result)
+  if (Object.keys(result.errors).length) {
+    Object.keys(result.errors).forEach((key) => {
+      delete result.errors[key].formattedMessage
+    })
   }
+
+  reply.send(result)
 }
 
 // Two URL's
 fastify.post('/', processPost)
-fastify.post('/v3', processPost)
-fastify.post('/v4', processPost)
 
 // Run the server!
 fastify.listen(port, '127.0.0.1', function (err) {
