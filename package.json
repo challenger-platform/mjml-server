@@ -9,7 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "dayjs": "^1.9.6",
+    "dayjs": "^1.9.8",
     "fastify": "^1.14.6",
     "mjml": "^4.7.1"
   }
