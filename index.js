@@ -29,7 +29,7 @@ let processPost = function (request, reply) {
   }
 
   let result = mjml2html(request.body.mjml, {
-    minify: true,
+    // minify: true, // minify option is deprecated in latest MJML 4
   })
 
   if (Object.keys(result.errors).length) {
