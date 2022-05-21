@@ -3,6 +3,7 @@ const mjml2html = require('mjml')
 const dayjs = require('dayjs')
 
 const port = 3000
+const host = "0.0.0.0" // Use "127.0.0.1" to accept connections from local interface only
 
 const log = {
   error: function (text) {
@@ -45,7 +46,7 @@ let processPost = function (request, reply) {
 fastify.post('/', processPost)
 
 // Run the server!
-fastify.listen(port, '127.0.0.1', function (err) {
+fastify.listen(port, '0.0.0.0', function (err) {
   if (err) throw err;
 
   log.notice(`server listening on ${fastify.server.address().port}`)
