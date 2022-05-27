@@ -6,18 +6,18 @@ const port = 3000
 const host = "0.0.0.0" // Use "127.0.0.1" to accept connections from local interface only
 
 const log = {
-  error: function (text) {
+  error (text) {
     console.log("[" + dayjs().format('YYYY-MM-DD HH:mm:ss') + "] Error: " + text)
   },
 
-  notice: function (text) {
+  notice (text) {
     console.log("[" + dayjs().format('YYYY-MM-DD HH:mm:ss') + "] Notice: " + text)
   }
 }
 
 // Processing HTTP request
-let processPost = function (request, reply) {
-  let url = new URL(request.raw.url, 'http://127.0.0.1:' + port)
+let processPost = (request, reply) => {
+  // let url = new URL(request.raw.url, 'http://127.0.0.1:' + port)
 
   if (!request.body || typeof request.body.mjml === 'undefined' || request.body.mjml === null) {
     reply.send({
@@ -46,7 +46,7 @@ let processPost = function (request, reply) {
 fastify.post('/', processPost)
 
 // Run the server!
-fastify.listen(port, '0.0.0.0', function (err) {
+fastify.listen(port, host, (err) => {
   if (err) throw err;
 
   log.notice(`server listening on ${fastify.server.address().port}`)
