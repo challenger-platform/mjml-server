@@ -1,6 +1,6 @@
 # Simple MJML Server
 
-## Installation
+## For developers
 
 * Install dependencies
     * ```npm install```
@@ -10,7 +10,13 @@
 
 ## How to use the server?
 
-### MJML version 4
+A Docker can be used for the purpose:
+```
+sudo docker compose pull
+docker compose up -d
+```
+
+### Using MJML version 4
 ```bash
 curl -X POST "http://127.0.0.1:3000" --header "Content-Type: application/json" -d '{"mjml":"<mjml><mj-body><mj-section><mj-column><mj-text>Hello World!</mj-text></mj-column></mj-section></mj-body></mjml>"}'
 ```
@@ -19,3 +25,4 @@ curl -X POST "http://127.0.0.1:3000" --header "Content-Type: application/json" -
 ```bash
 curl -X POST "http://127.0.0.1:3000/v2/parse" --header "Content-Type: application/json" -d '{"mjml":"<mjml><mj-body><mj-section><mj-column><mj-text>{{title}}</mj-text></mj-column></mj-section></mj-body></mjml>","values": {"title": "Hello World!"}}'
 ```
+
