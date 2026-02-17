@@ -74,3 +74,15 @@ fastify.listen(port, host, (err) => {
 
 	log.notice(`server listening on ${fastify.server.address().port}`)
 })
+
+// Handle Ctrl+C (SIGINT)
+process.on('SIGINT', () => {
+	console.log('Received SIGINT. Shutting down...');
+	process.exit(0); 
+});
+
+// Handle Docker Stop (SIGTERM)
+process.on('SIGTERM', () => {
+	console.log('Received SIGTERM. Cleaning up...');
+	process.exit(0);
+});
