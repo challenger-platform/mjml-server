@@ -1,7 +1,7 @@
 services:
   mjml-server:
     image: docker.io/ipaengasystems/mjml-server:1.0.2
-    container_name: mjml-server
+    # container_name: mjml-server
     restart: unless-stopped
     ports:
       - "${MJML_PORT:-3000}:3000"
