@@ -1,0 +1,25 @@
+# This file is designed to run and test the production build on a development machine. The acutal docker-compose.yml file is customized on the server.
+name: mjml-server
+services:
+  web:
+    image: ipaengasystems/mjml-server:latest
+    volumes:
+      - ./https:/app/https
+      - ./keys:/app/keys
+    restart: always
+    ports:
+      - "3003:3003"
+    env_file:
+      - ".env"
+      - ".env.production"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"   # Max size per file
+        max-file: "3"     # Keep only 3 old files
+    networks:
+      - backend  # Join the existing network
+networks:
+  backend:
+    external: true
+    name: backend_network

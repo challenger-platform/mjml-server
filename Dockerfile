@@ -1,17 +1,26 @@
-FROM node:20.20-alpine
-
-WORKDIR /srv/mjml-server
-
-# 1. Copy only package files first
+# --- Base Stage ---
+FROM node:20-slim AS base
+WORKDIR /app
 COPY package*.json ./
+# Adding node_modules/.bin to path means you can just call 'nodemon' instead of 'npx nodemon'
+ENV PATH /app/node_modules/.bin:$PATH
 
-# 2. Install dependencies (this layer stays cached unless package.json changes)
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# This will be inherited by both development and production stages
+ENTRYPOINT ["entrypoint.sh"]
+
+# --- Development Stage ---
+FROM base AS development
 RUN npm install
+COPY . .
+# No CMD needed! entrypoint.sh handles it.
 
-# Copy index file
-COPY ./index.js ./
-
-# Expose the port
-EXPOSE 3000
-
-CMD ["node", "index.js"]
+# --- Production Stage ---
+FROM base AS production
+ENV NODE_ENV=production
+RUN npm ci --omit=dev
+COPY . .
+EXPOSE 3001
+# No CMD needed! entrypoint.sh handles it.

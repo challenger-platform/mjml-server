@@ -1,13 +1,22 @@
 services:
-  mjml-server:
-    image: docker.io/ipaengasystems/mjml-server:1.0.2
-    # container_name: mjml-server
-    restart: unless-stopped
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: mjml-server-dev
+    # command: sh -c "npx nodemon ./src/server.js"
     ports:
-      - "${MJML_PORT:-3000}:3000"
-    build: .
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
+      - "3003:3003"
+    env_file:
+      - .env
+    volumes:
+      - .:/app # Mount your code
+      - /app/node_modules
+    networks:
+      - backend  # Join the existing network
+
+networks:
+  backend:
+    external: true
+    name: backend_network

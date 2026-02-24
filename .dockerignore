@@ -1,5 +1,17 @@
-# .dockerignore
-node_modules
-npm-debug.log
-.git
-.DS_Store
+.env
+.env.production
+https/
+keys/
+
+# Node artifact files
+node_modules/
+dist/
+
+# Docker files
+Dockerfile
+docker-compose.yml
+docker-compose.prod.yml
+.dockerignore
+
+# Log files
+*.log

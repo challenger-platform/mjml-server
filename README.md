@@ -8,13 +8,13 @@
     * ``node index.js``
 * Configure a reverse proxy to 127.0.0.1:3000
 
-## How to use the server?
+# Development run (Docker)
+* Start the docker `docker compose up | grep -v "incoming request\|request completed"`. `grep` is here to filter http request log entries 
 
-A Docker can be used for the purpose:
-```
-sudo docker compose pull
-docker compose up -d
-```
+# Production deployment (Docker)
+* Build an image: `docker build --target production -t ipaengasystems/mjml-server:<version_tag> .`
+* To test the image locally, update the tag in `docker-compose.prod.yml` and run : `docker compose -f docker-compose.prod.yml up --remove-orphans --force-recreate`
+* Push to the repository `docker push ipaengasystems/mjml-server:<version_tag>`
 
 ### Using MJML version 4
 ```bash
