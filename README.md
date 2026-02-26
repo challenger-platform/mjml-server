@@ -12,9 +12,9 @@
 * Start the docker `docker compose up | grep -v "incoming request\|request completed"`. `grep` is here to filter http request log entries 
 
 # Production deployment (Docker)
-* Build an image: `docker build --target production -t ipaengasystems/mjml-server:<version_tag> .`
+* Build an image: `docker build --target production -t repo.enga.systems/mjml-server:<version_tag> .`
 * To test the image locally, update the tag in `docker-compose.prod.yml` and run : `docker compose -f docker-compose.prod.yml up --remove-orphans --force-recreate`
-* Push to the repository `docker push ipaengasystems/mjml-server:<version_tag>`
+* Push to the repository `docker push repo.enga.systems/mjml-server:<version_tag>`
 
 ### Using MJML version 4
 ```bash
