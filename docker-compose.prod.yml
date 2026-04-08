@@ -2,13 +2,14 @@
 name: mjml-server
 services:
   web:
-    image: ipaengasystems/mjml-server:latest
+    build:
+      context: .
+    image: repo.enga.systems/mjml-server:latest
+    container_name: mjml-server
     volumes:
       - ./https:/app/https
       - ./keys:/app/keys
-    restart: always
-    ports:
-      - "3003:3003"
+    restart: no
     env_file:
       - ".env"
       - ".env.production"
@@ -18,8 +19,9 @@ services:
         max-size: "10m"   # Max size per file
         max-file: "3"     # Keep only 3 old files
     networks:
-      - backend  # Join the existing network
+      - backend
+
 networks:
   backend:
-    external: true
     name: backend_network
+    external: true

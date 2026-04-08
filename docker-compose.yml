@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
       target: development
-    container_name: mjml-server-dev
+    container_name: mjml-server
     # command: sh -c "npx nodemon ./src/server.js"
     ports:
       - "3003:3003"
@@ -18,5 +18,5 @@ services:
 
 networks:
   backend:
-    external: true
     name: backend_network
+    external: true
