@@ -6,7 +6,7 @@
   "main": "src/server.js",
   "scripts": {
     "prod": "node src/server.js",
-    "dev": "nodemon src/server.js",
+    "dev": "docker compose up --remove-orphans",
     "build": "docker compose -f docker-compose.prod.yml build",
     "test-prod": "docker compose -f docker-compose.prod.yml up --remove-orphans",
     "push": "docker compose -f docker-compose.prod.yml push"
