@@ -1,5 +1,5 @@
 # --- Base Stage ---
-FROM node:20-slim AS base
+FROM node:24-slim AS base
 WORKDIR /app
 COPY package*.json ./
 # Adding node_modules/.bin to path means you can just call 'nodemon' instead of 'npx nodemon'
