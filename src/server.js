@@ -74,10 +74,10 @@ fastify.post('/', processPost)
 fastify.post('/v2/parse', processPostWithHandlebars)
 
 // Run the server!
-fastify.listen(
-	process.env.APP_PORT || 3000,
-	process.env.APP_HOST_LISTEN || "0.0.0.0", // Use "127.0.0.1" to accept connections from local interface only
-).catch(err => {
+fastify.listen({
+	port: Number(process.env.APP_PORT || 3000),
+	host: process.env.APP_HOST_LISTEN || "0.0.0.0", // Use "127.0.0.1" to accept connections from local interface only
+}).catch(err => {
 	if (err) {
 		fastify.log.error(err)
 		process.exit(1)

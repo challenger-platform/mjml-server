@@ -8,7 +8,7 @@
     "prod": "node src/server.js",
     "dev": "docker compose up --remove-orphans --force-recreate",
     "build": "docker compose -f docker-compose.prod.yml build",
-    "test-prod": "docker compose -f docker-compose.prod.yml up --remove-orphans",
+    "test-prod": "docker compose -f docker-compose.prod.yml up --remove-orphans --force-recreate",
     "push": "docker compose -f docker-compose.prod.yml push"
   },
   "author": "",
