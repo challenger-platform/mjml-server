@@ -15,13 +15,13 @@ function appRoot(){
 }
 
 // Parse MJML and return result
-function parseMjml(mjml){
-	const result = mjml2html(mjml, {
+async function parseMjml(mjml){
+	const result = await mjml2html(mjml, {
 		mjmlConfigPath: appRoot(), // Set mjml config path to script root directory
 	})
 
 	// Suppress errors to output
-	if (Object.keys(result.errors).length) {
+	if (result?.errors && Object.keys(result.errors).length) {
 		Object.keys(result.errors).forEach(key => {
 			delete result.errors[key].formattedMessage
 		})
@@ -31,7 +31,7 @@ function parseMjml(mjml){
 }
 
 // Processing HTTP request
-const processPost = (request, reply) => {
+const processPost = async (request, reply) => {
 	if (!request?.body?.mjml) {
 		reply.send({
 			error: "No MJML input"
@@ -42,11 +42,11 @@ const processPost = (request, reply) => {
 		return;
 	}
 
-	reply.send(parseMjml(request.body.mjml))
+	reply.send(await parseMjml(request.body.mjml))
 }
 
 // Parse Handlebars and then MJML 
-const processPostWithHandlebars = (request, reply) => {
+const processPostWithHandlebars = async (request, reply) => {
 	if (!request?.body?.mjml) {
 		reply.send({
 			error: "No MJML input"
@@ -58,7 +58,7 @@ const processPostWithHandlebars = (request, reply) => {
 
 	const template = Handlebars.compile(request.body.mjml)
 	
-	reply.send(parseMjml(template(request?.body?.values)))
+	reply.send(await parseMjml(template(request?.body?.values)))
 }
 
 // Start Fastify server

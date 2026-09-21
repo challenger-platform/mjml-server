@@ -16,7 +16,7 @@
   "dependencies": {
     "fastify": "^2.0",
     "handlebars": "^4.7.7",
-    "mjml": "^4.7.1",
+    "mjml": "^5.4.1",
     "winston": "^3.19.0"
   },
   "devDependencies": {
