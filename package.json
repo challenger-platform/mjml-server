@@ -14,7 +14,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "fastify": "^2.0",
+    "fastify": "^5.12.5",
     "handlebars": "^4.7.7",
     "mjml": "^5.4.1",
     "winston": "^3.19.0"
