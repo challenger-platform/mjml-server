@@ -7,5 +7,5 @@ if [ "$NODE_ENV" = "production" ]; then
 else
     echo "Starting Development Server with Nodemon..."
     # We use exec so nodemon handles OS signals (like SIGTERM)
-    exec nodemon ./src/server.js
+    exec npx nodemon ./src/server.js
 fi
