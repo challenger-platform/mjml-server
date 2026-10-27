@@ -7,7 +7,7 @@
   "scripts": {
     "prod": "node src/server.js",
     "dev": "docker compose up --remove-orphans --force-recreate",
-    "build": "docker compose -f docker-compose.prod.yml build",
+    "build": "docker compose -f docker-compose.prod.yml build --pull",
     "test-prod": "docker compose -f docker-compose.prod.yml up --remove-orphans --force-recreate",
     "push": "docker compose -f docker-compose.prod.yml push"
   },
